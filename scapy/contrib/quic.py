@@ -1,3 +1,10 @@
+# SPDX-License-Identifier: GPL-2.0-or-later
+# This file is part of Scapy
+# See https://scapy.net/ for more information
+
+# scapy.contrib.description = QUIC Transport Parameters
+# scapy.contrib.status = loads
+
 """
 RFC9000 QUIC Transport Parameters
 """
