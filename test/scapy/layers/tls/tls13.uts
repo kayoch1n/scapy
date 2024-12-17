@@ -1228,7 +1228,7 @@ assert ch.msg[0].ext[9].identities[0].obfuscated_ticket_age == 0
 ~ quic
 
 from binascii import unhexlify
-from scapy.contrib.quic import *
+from scapy.layers.tls.quic import *
 from scapy.layers.tls.all import TLS13ClientHello, TLS_Ext_QuicTransportParameters
 
 ch_data = unhexlify("010000f40303e4de73a1d4479044cf059e910eaefaa983f4f8bf19c1655e13e375c2022ea986000006130113021303010000c500000013001100000e717569632e6e67696e782e6f7267000a00080006001d00170018001000050003026833000d00140012040308040401050308050501080606010201003300260024001d00208d29460c9281267d97af86a7bcc70031c482f64ef2bde21ceb89e5702e89ba71002d00020101002b00030203040039004601025388030245460404809896800504800f42400604800f42400704800f424008024064090240640a01030b01190c000f142173071905d778f98e367b8ad8eeb526484e8f5d")
@@ -1264,7 +1264,7 @@ assert tp.params[11].value == unhexlify("2173071905d778f98e367b8ad8eeb526484e8f5
 ~ quic
 
 from binascii import unhexlify
-from scapy.contrib.quic import *
+from scapy.layers.tls.quic import *
 from scapy.layers.tls.all import TLS_Ext_QuicTransportParameters
 
 tp = TLS_Ext_QuicTransportParameters(params=[

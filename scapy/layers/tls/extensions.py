@@ -35,7 +35,7 @@ from scapy.layers.tls.keyexchange import (SigAndHashAlgsLenField,
 from scapy.layers.tls.session import _GenericTLSSessionInheritance
 from scapy.layers.tls.crypto.groups import _tls_named_groups
 from scapy.layers.tls.crypto.suites import _tls_cipher_suites
-from scapy.contrib.quic import _QuicTransportParametersField
+from scapy.layers.tls.quic import _QuicTransportParametersField
 from scapy.themes import AnsiColorTheme
 from scapy.compat import raw
 from scapy.config import conf
@@ -703,8 +703,8 @@ class TLS_Ext_QuicTransportParameters(TLS_Ext_Unknown):  # RFC9000
     name = "TLS Extension - QUIC Transport Parameters"
     fields_desc = [ShortEnumField("type", 0x39, _tls_ext),
                    FieldLenField("len", None, length_of="params"),
-                   _QuicTransportParametersField("params", 
-                                                 None, 
+                   _QuicTransportParametersField("params",
+                                                 None,
                                                  length_from=lambda pkt: pkt.len)]
 
 
