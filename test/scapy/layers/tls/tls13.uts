@@ -1225,6 +1225,8 @@ assert ch.msg[0].ext[9].identities[0].obfuscated_ticket_age == 0
 + QUIC Transport Parameters
 
 = QUIC Transport Parameters - Parse hex stream
+~ quic
+
 from binascii import unhexlify
 from scapy.contrib.quic import *
 from scapy.layers.tls.all import TLS13ClientHello, TLS_Ext_QuicTransportParameters
@@ -1259,6 +1261,8 @@ assert isinstance(tp.params[11], Quic_Tp_InitialSourceConnectionId)
 assert tp.params[11].value == unhexlify("2173071905d778f98e367b8ad8eeb526484e8f5d")
 
 = QUIC Transport Parameters - Build packet
+~ quic
+
 from binascii import unhexlify
 from scapy.contrib.quic import *
 from scapy.layers.tls.all import TLS_Ext_QuicTransportParameters
@@ -1278,6 +1282,8 @@ tp = TLS_Ext_QuicTransportParameters(params=[
     Quic_Tp_InitialSourceConnectionId(value=unhexlify("2173071905d778f98e367b8ad8eeb526484e8f5d")),
 ])
 actual = tp.build()
+
+# the expected data is extracted from the ClientHello above
 expect = unhexlify("0039004601025388030245460404809896800504800f42400604800f42400704800f424008024064090240640a01030b01190c000f142173071905d778f98e367b8ad8eeb526484e8f5d")
 
 assert actual == expect
