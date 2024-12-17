@@ -218,7 +218,7 @@ class Quic_Tp_DisableActiveMigration(Quic_Tp_Unknown):
     name = "QUIC Transport Parameters - Disable Active Migration"
     fields_desc = [
         QuicVarEnumField("type", 0x0C, _quic_tp_type),
-        QuicVarLenField("len", None, length_of="value"),
+        QuicVarIntField("len", 0),
     ]
 
 
@@ -227,7 +227,7 @@ class Quic_Tp_PreferredAddress(Quic_Tp_Unknown):
     fields_desc = [
         QuicVarEnumField("type", 0x0D, _quic_tp_type),
         QuicVarLenField("len", None, length_of="value"),
-        # TODO:
+        StrLenField("value", None, length_from=lambda pkt: pkt.len),
     ]
 
 
