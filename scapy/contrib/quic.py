@@ -28,32 +28,33 @@ def _quic_m2varint(m: bytes) -> tuple[int, int]:
     length = 1 << ((m[0] & 0xC0) >> 6)
     if len(m) < length:
         raise ValueError(
-            "QUIC variable-length integer decoding expects %d byte(s), while %d byte(s) given"
-            % (length, len(m))
+            "QUIC variable-length integer decoding expects %d byte(s), "
+            "while %d byte(s) given" % (length, len(m))
         )
     mask = (0x40 << (length - 1) * 8) - 1
     return int.from_bytes(m[:length], "big") & mask, length
 
 
 def _quic_i2mask_len(i: int) -> tuple[int, int]:
-    l = i.bit_length()
-    if l <= 6:
+    length = i.bit_length()
+    if length <= 6:
         return 0, 1
-    elif l <= 14:
+    elif length <= 14:
         return 0x4000, 2
-    elif l <= 30:
+    elif length <= 30:
         return 0x80000000, 4
-    elif l <= 62:
+    elif length <= 62:
         return 0xC000000000000000, 8
     else:
         raise ValueError(
-            "cannot apply QUIC variable-length encoding on integer with more than 62 bits"
+            "cannot apply QUIC variable-length encoding on integer "
+            "with more than 62 bits"
         )
 
 
 def _quic_i2m(i: int) -> bytes:
-    mask, l = _quic_i2mask_len(i)
-    return (i | mask).to_bytes(l, "big")
+    mask, length = _quic_i2mask_len(i)
+    return (i | mask).to_bytes(length, "big")
 
 
 class _QuicVarIntMixin:

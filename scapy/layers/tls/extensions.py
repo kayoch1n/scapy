@@ -703,7 +703,9 @@ class TLS_Ext_QuicTransportParameters(TLS_Ext_Unknown):  # RFC9000
     name = "TLS Extension - QUIC Transport Parameters"
     fields_desc = [ShortEnumField("type", 0x39, _tls_ext),
                    FieldLenField("len", None, length_of="params"),
-                   _QuicTransportParametersField("params", None, length_from=lambda pkt: pkt.len)]
+                   _QuicTransportParametersField("params", 
+                                                 None, 
+                                                 length_from=lambda pkt: pkt.len)]
 
 
 _tls_ext_cls = {0: TLS_Ext_ServerName,
